@@ -4,6 +4,40 @@
 
 # flyway-core-slim
 
+Overrides [``flyway-core``](https://github.com/flyway/flyway) in a way that [ unused things](https://github.com/flyway/flyway/issues/3893) are excluded.
+
+Details about exclusions are available in the [changelogs](./CHANGELOG.md).
+
+## Usage
+
+This library is primarily designed to be used in conjunction with Spring Boot projects.
+
+```xml
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>...</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+<dependencies>
+    <dependency>
+        <groupId>software.xdev</groupId>
+        <artifactId>flyway-core-slim</artifactId>
+        <!-- You should ensure that this version is compatible with the flyway version provided by Spring Boot -->
+        <version>...</version>
+    </dependency>
+    <dependency>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-mysql</artifactId>
+    </dependency>
+</dependencies>
+```
 
 ## Installation
 [Installation guide for the latest release](https://github.com/xdev-software/flyway-core-slim/releases/latest#Installation)
