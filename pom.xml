@@ -16,7 +16,6 @@
 
 	<modules>
 		<module>flyway-core-slim</module>
-		<module>flyway-core-slim-demo</module>
 	</modules>
 
 	<properties>
