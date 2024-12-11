@@ -114,6 +114,8 @@ public class PluginRegister
 		return Collections.unmodifiableList(this.registeredPlugins);
 	}
 	
+	// This is not used on virtual threads
+	@SuppressWarnings("PMD.AvoidSynchronizedStatement")
 	void registerPlugins()
 	{
 		// Quick exit
