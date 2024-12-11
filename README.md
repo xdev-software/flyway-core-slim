@@ -4,7 +4,7 @@
 
 # flyway-core-slim
 
-Overrides [``flyway-core``](https://github.com/flyway/flyway) in a way that [ unused things](https://github.com/flyway/flyway/issues/3893) are excluded.
+A overlay for [``flyway-core``](https://github.com/flyway/flyway) to exclude [unused things](https://github.com/flyway/flyway/issues/3893).
 
 Details about exclusions are available in the [changelogs](./CHANGELOG.md).
 
