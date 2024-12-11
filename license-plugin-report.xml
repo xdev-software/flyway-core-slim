@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="FORMAT" timestamp="1733929017975">
+<licensePluginReport goal="FORMAT" timestamp="1733931675455">
     <module artifactId="flyway-core-slim" groupId="software.xdev" version="1.0.0"/>
     <files>
         <file path="src/main/java/org/flywaydb/core/extensibility/ConfigurationExtension.java" result="NOOP"/>
