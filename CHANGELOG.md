@@ -1,3 +1,6 @@
+# 1.0.1
+Do not include MariaDB JDBC adapter in ``compile`` scope.
+
 # 1.0.0
 _Compatible with Flyway 1.20.1_
 
