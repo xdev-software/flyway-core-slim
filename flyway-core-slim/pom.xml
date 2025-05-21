@@ -48,7 +48,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<flyway.version>10.20.1</flyway.version>
+		<flyway.version>11.8.2</flyway.version>
 		<testcontainers.version>1.21.0</testcontainers.version>
 
 		<!-- by default run no tests as Docker is required -->
