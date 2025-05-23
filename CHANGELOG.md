@@ -1,3 +1,8 @@
+# 1.1.0
+_Compatible with Flyway 11.7.2_
+
+* Compatible with Flyway 11.7.2 (shipped with Spring Boot 3.5) #40
+
 # 1.0.2
 * Migrated deployment to _Sonatype Maven Central Portal_ [#155](https://github.com/xdev-software/standard-maven-template/issues/155)
 * Updated dependencies
@@ -6,7 +11,7 @@
 Do not include MariaDB JDBC adapter in ``compile`` scope.
 
 # 1.0.0
-_Compatible with Flyway 1.20.1_
+_Compatible with Flyway 10.20.1_
 
 _Initial release_
 
