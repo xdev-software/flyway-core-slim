@@ -85,6 +85,11 @@ public class PluginRegister
 			.toList();
 	}
 	
+	public <T extends Plugin> T getLicensedPlugin(final Class<T> clazz, final Configuration configuration)
+	{
+		return getLicensedPlugins(clazz, configuration).stream().findFirst().orElse(null);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public <T extends Plugin> T getLicensedPlugin(final String className, final Configuration configuration)
 	{
@@ -103,6 +108,17 @@ public class PluginRegister
 		return (T)this.getPlugins()
 			.stream()
 			.filter(p -> p.getClass().getSimpleName().equals(className))
+			.sorted()
+			.findFirst()
+			.orElse(null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T extends Plugin> T getPluginInstanceOf(final Class<T> clazz)
+	{
+		return (T)getPlugins()
+			.stream()
+			.filter(clazz::isInstance)
 			.sorted()
 			.findFirst()
 			.orElse(null);

@@ -31,8 +31,10 @@ import org.flywaydb.core.api.migration.baseline.BaselineMigrationTypeResolver;
 import org.flywaydb.core.api.migration.baseline.BaselineResourceTypeProvider;
 import org.flywaydb.core.experimental.migration.CoreMigrationTypeResolver;
 import org.flywaydb.core.extensibility.Plugin;
+import org.flywaydb.core.internal.NullFlywayTelemetryManager;
 import org.flywaydb.core.internal.configuration.resolvers.EnvironmentProvisionerNone;
 import org.flywaydb.core.internal.configuration.resolvers.EnvironmentVariableResolver;
+import org.flywaydb.core.internal.configuration.resolvers.PlaceholderPropertyResolver;
 import org.flywaydb.core.internal.resource.CoreResourceTypeProvider;
 import org.flywaydb.core.internal.schemahistory.BaseAppliedMigration;
 import org.flywaydb.database.mysql.MySQLDatabaseType;
@@ -54,6 +56,7 @@ class TestPluginRegister
 			BaseAppliedMigration.class,
 			CoreResourceTypeProvider.class,
 			EnvironmentVariableResolver.class,
+			PlaceholderPropertyResolver.class,
 			BaselineAppliedMigration.class,
 			BaselineMigrationConfigurationExtension.class,
 			BaselineMigrationResolver.class,
@@ -61,6 +64,7 @@ class TestPluginRegister
 			BaselineMigrationTypeResolver.class,
 			CoreMigrationTypeResolver.class,
 			EnvironmentProvisionerNone.class,
+			NullFlywayTelemetryManager.class,
 			MySQLDatabaseType.class,
 			MariaDBDatabaseType.class);
 		
