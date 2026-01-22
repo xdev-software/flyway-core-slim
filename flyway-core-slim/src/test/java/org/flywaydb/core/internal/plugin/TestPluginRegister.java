@@ -22,20 +22,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.flywaydb.core.api.migration.baseline.BaselineAppliedMigration;
 import org.flywaydb.core.api.migration.baseline.BaselineMigrationConfigurationExtension;
 import org.flywaydb.core.api.migration.baseline.BaselineMigrationResolver;
-import org.flywaydb.core.api.migration.baseline.BaselineMigrationTypeResolver;
 import org.flywaydb.core.api.migration.baseline.BaselineResourceTypeProvider;
-import org.flywaydb.core.experimental.migration.CoreMigrationTypeResolver;
 import org.flywaydb.core.extensibility.Plugin;
 import org.flywaydb.core.internal.NullFlywayTelemetryManager;
 import org.flywaydb.core.internal.configuration.resolvers.EnvironmentProvisionerNone;
 import org.flywaydb.core.internal.configuration.resolvers.EnvironmentVariableResolver;
 import org.flywaydb.core.internal.configuration.resolvers.PlaceholderPropertyResolver;
+import org.flywaydb.core.internal.jdbc.ErrorOverrideInitializerStub;
 import org.flywaydb.core.internal.resource.CoreResourceTypeProvider;
+import org.flywaydb.core.internal.scanner.classpath.ClasspathLocationHandlerImpl;
+import org.flywaydb.core.internal.scanner.filesystem.FilesystemLocationHandler;
 import org.flywaydb.core.internal.schemahistory.BaseAppliedMigration;
 import org.flywaydb.database.mysql.MySQLDatabaseType;
 import org.flywaydb.database.mysql.mariadb.MariaDBDatabaseType;
@@ -61,12 +63,13 @@ class TestPluginRegister
 			BaselineMigrationConfigurationExtension.class,
 			BaselineMigrationResolver.class,
 			BaselineResourceTypeProvider.class,
-			BaselineMigrationTypeResolver.class,
-			CoreMigrationTypeResolver.class,
 			EnvironmentProvisionerNone.class,
 			NullFlywayTelemetryManager.class,
 			MySQLDatabaseType.class,
-			MariaDBDatabaseType.class);
+			MariaDBDatabaseType.class,
+			ClasspathLocationHandlerImpl.class,
+			ErrorOverrideInitializerStub.class,
+			FilesystemLocationHandler.class);
 		
 		assertAll(
 			expectedPluginClasses.stream()
@@ -76,6 +79,6 @@ class TestPluginRegister
 						Optional.ofNullable(pluginTypes.remove(clazz)).orElseGet(List::of).size(),
 						() -> "Plugin not found: " + clazz)));
 		
-		assertEquals(0, pluginTypes.size(), () -> "Found unknown plugins:" + pluginTypes.keySet());
+		assertEquals(Set.of(), pluginTypes.keySet());
 	}
 }

@@ -15,12 +15,12 @@
  */
 package software.xdev.flyway;
 
-import org.testcontainers.containers.MariaDBContainer;
+import org.testcontainers.mariadb.MariaDBContainer;
 import org.testcontainers.utility.DockerImageName;
 
 
 @SuppressWarnings("java:S2160") // Nothing else to compare
-public class SimpleMariaDBContainer extends MariaDBContainer<SimpleMariaDBContainer>
+public class SimpleMariaDBContainer extends MariaDBContainer
 {
 	public static final int MAJOR_VERSION = 11;
 	

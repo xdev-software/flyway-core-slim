@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.flywaydb.core.api.configuration.Configuration;
 import org.flywaydb.core.extensibility.Plugin;
@@ -54,7 +55,70 @@ public class PluginRegister
 	protected final ClassLoader classLoader = this.getClass().getClassLoader();
 	protected boolean hasRegisteredPlugins;
 	
+	/**
+	 * @deprecated Use {@link #getExact(Class)} instead.
+	 */
+	@Deprecated
 	public <T extends Plugin> T getPlugin(final Class<T> clazz)
+	{
+		return this.getExact(clazz);
+	}
+	
+	/**
+	 * @deprecated Use {@link #getInstancesOf(Class)} instead.
+	 */
+	@Deprecated
+	public <T extends Plugin> List<T> getPlugins(final Class<T> clazz)
+	{
+		return this.getInstancesOf(clazz);
+	}
+	
+	/**
+	 * @deprecated Use {@link #getLicensedInstancesOf(Class, Configuration)} instead.
+	 */
+	@Deprecated
+	public <T extends Plugin> List<T> getLicensedPlugins(final Class<T> clazz, final Configuration configuration)
+	{
+		return this.getLicensedInstancesOf(clazz, configuration);
+	}
+	
+	/**
+	 * @deprecated Use {@link #getLicensedInstanceOf(Class, Configuration)} instead.
+	 */
+	@Deprecated
+	public <T extends Plugin> T getLicensedPlugin(final Class<T> clazz, final Configuration configuration)
+	{
+		return this.getLicensedInstanceOf(clazz, configuration);
+	}
+	
+	/**
+	 * @deprecated Use {@link #getLicensedExact(String, Configuration)} instead.
+	 */
+	@Deprecated
+	public <T extends Plugin> T getLicensedPlugin(final String className, final Configuration configuration)
+	{
+		return this.getLicensedExact(className, configuration);
+	}
+	
+	/**
+	 * @deprecated Use {@link #getExact(String)} instead.
+	 */
+	@Deprecated
+	public <T extends Plugin> T getPlugin(final String className)
+	{
+		return this.getExact(className);
+	}
+	
+	/**
+	 * @deprecated Use {@link #getInstanceOf(Class)} instead.
+	 */
+	@Deprecated
+	public <T extends Plugin> T getPluginInstanceOf(final Class<T> clazz)
+	{
+		return this.getInstanceOf(clazz);
+	}
+	
+	public <T extends Plugin> T getExact(final Class<T> clazz)
 	{
 		return this.getPlugins()
 			.stream()
@@ -64,17 +128,17 @@ public class PluginRegister
 			.orElse(null);
 	}
 	
-	public <T extends Plugin> List<T> getPlugins(final Class<T> clazz)
+	public <T extends Plugin> List<T> getInstancesOf(final Class<T> clazz)
 	{
 		return this.getPlugins()
 			.stream()
 			.filter(clazz::isInstance)
 			.map(clazz::cast)
 			.sorted()
-			.toList();
+			.collect(Collectors.toList());
 	}
 	
-	public <T extends Plugin> List<T> getLicensedPlugins(final Class<T> clazz, final Configuration configuration)
+	public <T extends Plugin> List<T> getLicensedInstancesOf(final Class<T> clazz, final Configuration configuration)
 	{
 		return this.getPlugins()
 			.stream()
@@ -82,16 +146,16 @@ public class PluginRegister
 			.filter(p -> p.isLicensed(configuration))
 			.map(clazz::cast)
 			.sorted()
-			.toList();
+			.collect(Collectors.toList());
 	}
 	
-	public <T extends Plugin> T getLicensedPlugin(final Class<T> clazz, final Configuration configuration)
+	public <T extends Plugin> T getLicensedInstanceOf(final Class<T> clazz, final Configuration configuration)
 	{
-		return getLicensedPlugins(clazz, configuration).stream().findFirst().orElse(null);
+		return this.getLicensedInstancesOf(clazz, configuration).stream().findFirst().orElse(null);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T extends Plugin> T getLicensedPlugin(final String className, final Configuration configuration)
+	public <T extends Plugin> T getLicensedExact(final String className, final Configuration configuration)
 	{
 		return (T)this.getPlugins()
 			.stream()
@@ -103,7 +167,7 @@ public class PluginRegister
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T extends Plugin> T getPlugin(final String className)
+	public <T extends Plugin> T getExact(final String className)
 	{
 		return (T)this.getPlugins()
 			.stream()
@@ -113,24 +177,23 @@ public class PluginRegister
 			.orElse(null);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public <T extends Plugin> T getPluginInstanceOf(final Class<T> clazz)
+	public <T extends Plugin> T getInstanceOf(final Class<T> clazz)
 	{
-		return (T)getPlugins()
+		return this.getPlugins()
 			.stream()
 			.filter(clazz::isInstance)
 			.sorted()
 			.findFirst()
+			.map(clazz::cast)
 			.orElse(null);
 	}
 	
-	protected List<Plugin> getPlugins()
+	List<Plugin> getPlugins()
 	{
 		this.registerPlugins();
 		return Collections.unmodifiableList(this.registeredPlugins);
 	}
 	
-	// This is not used on virtual threads
 	@SuppressWarnings("PMD.AvoidSynchronizedStatement")
 	void registerPlugins()
 	{
