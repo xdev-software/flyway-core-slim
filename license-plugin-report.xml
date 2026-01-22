@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<licensePluginReport goal="FORMAT" timestamp="1769096999205">
+    <module artifactId="flyway-core-slim" groupId="software.xdev" version="2.0.0"/>
+    <files>
+        <file path="src/main/java/org/flywaydb/core/extensibility/ConfigurationExtension.java" result="NOOP"/>
+        <file path="src/main/java/org/flywaydb/core/internal/plugin/PluginRegister.java" result="NOOP"/>
+        <file path="src/test/java/org/flywaydb/core/internal/plugin/TestPluginRegister.java" result="NOOP"/>
+        <file path="src/test/java/software/xdev/flyway/MariaDBIntegrationTest.java" result="NOOP"/>
+        <file path="src/test/java/software/xdev/flyway/SimpleMariaDBContainer.java" result="NOOP"/>
+    </files>
+</licensePluginReport>
