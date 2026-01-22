@@ -2,6 +2,7 @@
 _Compatible with Flyway 11.14.1_
 
 * Compatible with Flyway 11.14.1 (shipped with Spring Boot 4.0) #73
+  * Also compatible with currently latest Flyway version: 11.20.2
 
 # 1.1.0
 _Compatible with Flyway 11.7.2_
